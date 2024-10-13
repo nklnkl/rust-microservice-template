@@ -22,7 +22,7 @@ type Schema = RootNode<'static, Query, EmptyMutation<Context>, EmptySubscription
 
 #[get("/")]
 fn index() -> &'static str {
-    "Hello, Rocket!"
+    "Hello, Rust Rocket Microservice Template!!"
 }
 
 #[get("/graphql")]

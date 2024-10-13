@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      target: builder
+    volumes:
+      - .:/usr/src/app
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/usr/src/app/target
+    environment:
+      - ROCKET_ENV=development
+      - ROCKET_ADDRESS=0.0.0.0
+    command: cargo watch -x run
+    ports:
+      - "8000:8000"
+
+  db:
+    ports:
+      - "5432:5432"
+
+volumes:
+  cargo-cache:
+  target-cache:
