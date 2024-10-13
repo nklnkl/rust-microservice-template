@@ -1,10 +1,13 @@
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate juniper;
 
+mod models;
+
 use juniper::{EmptyMutation, RootNode, EmptySubscription};
 use rocket::State;
 use juniper_rocket::{GraphQLRequest, GraphQLResponse};
 use rocket::response::content::RawHtml;
+use models::test_object::TestObject;
 
 struct Context;
 impl juniper::Context for Context {}
@@ -15,6 +18,11 @@ struct Query;
 impl Query {
     fn hello() -> &'static str {
         "Hello, GraphQL!"
+    }
+
+    fn test_object(id: String) -> Option<TestObject> {
+        // This is a mock implementation. In a real application, you would fetch the object from a database.
+        Some(TestObject::new("Test Object".to_string()))
     }
 }
 
