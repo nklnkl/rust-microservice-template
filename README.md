@@ -13,18 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Setting up the environment
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/nklnkl/rust-microservice-template.git
-   cd rust-microservice-template
-   ```
-
-2. Create a `.env` file in the root directory with the following content:
-   ```
-   DB_NAME=your_project_name
-   DB_PASSWORD=your_secure_password
-   ```
-   Replace `your_secure_password` with a strong password.
+1. Create a GitHub repository from this template using the instructions [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
 ### Running the application
 
