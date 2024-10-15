@@ -2,6 +2,8 @@
 #[macro_use] extern crate juniper;
 
 mod models;
+mod db;
+mod migrations;
 
 use juniper::{EmptyMutation, RootNode, EmptySubscription};
 use rocket::State;
@@ -20,7 +22,7 @@ impl Query {
         "Hello, GraphQL!"
     }
 
-    fn test_object(id: String) -> Option<TestObject> {
+    fn test_object(_id: String) -> Option<TestObject> {
         // This is a mock implementation. In a real application, you would fetch the object from a database.
         Some(TestObject::new("Test Object".to_string()))
     }
@@ -49,6 +51,10 @@ fn graphql_handler(
 
 #[launch]
 fn rocket() -> _ {
+    // Run migrations
+    let mut connection = db::establish_connection().get().expect("Failed to get DB connection");
+    migrations::run_migrations(&mut connection);
+
     let schema = Schema::new(Query, EmptyMutation::new(), EmptySubscription::new());
     rocket::build()
         .manage(Context)
